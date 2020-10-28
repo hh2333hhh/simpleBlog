@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <title>工具箱</title>
+</head>
+
+<body>
+
+<!--头部导航-->
+<nav th:replace="admin/_fragments :: menu(5)">
+
+</nav>
+
+
+
+<!--中间内容-->
+<div  class="m-container m-padded-tb-big animated fadeIn">
+    <div class="ui container">
+        <div class="ui special cards">
+            <div class="ui card">
+                <div class="content">
+                    <div class="header">会员操作</div>
+                </div>
+                <div class="content">
+                    <div class="ui small feed">
+                        <div class="event">
+                            <div class="content">
+                                <div class="summary">升级<a>初级</a>会员 </div>
+                            </div>
+                        </div>
+                        <div class="event">
+                            <div class="content">
+                                <div class="summary">升级<a>高级</a>会员 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <button class="ui button" th:onclick="|show()|">选择</button>
+                </div>
+            </div>
+
+
+            <div class="ui card">
+                <div class="content">
+                    <div class="header">敬请期待...</div>
+                </div>
+
+                <div class="content">
+                    <img class="ui wireframe image" src="#" th:src="@{/images/paragraph.png}">
+                </div>
+
+                <div class="extra content">
+                    <button class="ui button">选择</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui mini negative message" th:text="${msg}" th:if="${msg}" >用户名和密码错误</div>
+    <div class="ui success message" th:if="${ok}">
+        <i class="close icon"></i>
+        <div class="header">提示：</div>
+        <p th:text="${ok}">恭喜，操作成功！</p>
+    </div>
+
+    <div class="ui modal" id="modal1">
+        <div class="ui attached message">
+            <div class="header">升级会员！ </div>
+            <p>升级会员工具箱</p>
+        </div>
+        <form class="ui form attached fluid segment" method="post" action="#" th:action="@{/admin/updateGrade}">
+            <div class="ui  segment">
+                <div class="field">
+                    <label>邮件</label>
+                    <input type="text" name="email" placeholder="输入会员的邮件...">
+                </div>
+                <div class="field">
+                    <label>等级</label>
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="grade">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">选择提升的等级...</div>
+                        <div class="menu">
+                            <div class="item" data-value="1">初级会员</div>
+                            <div class="item" data-value="0">高级会员</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="ui blue submit button" type="submit">确定</button>
+            </div>
+            <div class="ui error mini message"></div>
+        </form>
+    </div>
+</div>
+
+<br>
+<br>
+<!--底部footer-->
+<footer th:replace="admin/_fragments :: footer">
+
+</footer>
+
+<th:block th:replace="admin/_fragments :: script">
+
+</th:block>
+
+<script>
+    $('.ui.form').form({
+        on: 'blur',
+        fields : {
+            email: {
+                identifier  : 'email', //表单中的name属性值
+                rules: [
+                    {
+                        type   : 'email',
+                        prompt : '请输入正确的邮件'
+                    }
+                ]
+            },
+
+        }
+    });
+
+    function show() {
+        $("#modal1")
+            .modal('show')
+        ;
+    }
+
+    $('select.dropdown')
+        .dropdown()
+    ;
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
+</script>
+</body>
+</html>

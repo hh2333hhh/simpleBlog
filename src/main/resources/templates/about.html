@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head  th:replace="_fragments :: head(~{::title})">
+  <title>关于我</title>
+</head>
+
+<body class="aboutme-bg">
+
+  <!--头部导航-->
+  <nav th:replace="_fragments :: menu(6)" ></nav>
+
+  <!--中间内容-->
+  <div  class="m-container m-padded-tb-big animated fadeIn">
+    <div class="ui container">
+
+      <div class="ui stackable grid">
+        <div class="eleven wide column">
+          <div class="ui top attached segment">
+            <div class="ui header">关于我</div>
+          </div>
+          <div class="ui attached segment">
+            <p class="m-text">大家好，我是情茧，一个18年交易经验的股市老鸟。</p>
+            <p class="m-text">经历过熊市，经历过牛市，从一开始在浮盈浮亏中迷失，再到后来摸爬滚打，敬畏市场，终于总结出了自己的交易体系，保持了稳定盈利。</p>
+            <p class="m-text">对于大部分仍然迷失在股市中的人来说，我希望大家想明白一个问题。</p>
+            <p class="m-text">股市不是赌桌，财富的增长需要耐心、稳定以及持续累积。
+              认真摆正交易心态，正确认识技术分析的重要性，严格地执行交易策略，不幻想，不犹豫，才能提高交易的成功率。</p>
+            <p class="m-text">了解了这些，你才能真正体会到快乐交易的理念，让你的财富不断增值。</p>
+          </div>
+          <!--
+          <div class="ui attached segment">
+            <p class="m-text">波段为王，快乐交易的理念！</p>
+            <p class="m-text">1.	波段交易，规避阶段性回撤，把握行情起爆点。</p>
+            <p class="m-text">2.	高胜率交易：高盈亏比+高成功率=资产增值。</p>
+            <p class="m-text">3.	快乐交易的心态，让交易不再是负担。</p>
+            <p class="m-text">4.	技术分析的重要性，即使在浮亏时也胸有成竹。</p>
+          </div>
+          -->
+        </div>
+
+        <div class="four wide column">
+          <div class="ui segment">
+            <img th:src="@{/images/about.jpg}" alt="" class="ui rounded image">
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <!--底部footer-->
+  <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+
+  </footer>
+
+  <!--导入的script-->
+  <th:block th:replace="_fragments :: script">
+
+  </th:block>
+
+  <script>
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+      on : 'hover'
+    });
+
+    $('.wechat').popup({
+      popup : $('.wechat-qr'),
+      position: 'bottom center'
+    });
+    $('.qq').popup();
+
+  </script>
+</body>
+</html>

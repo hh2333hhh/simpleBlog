@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <title>会员注册</title>
+</head>
+
+<body class="login-bg">
+
+<br>
+<br>
+<br>
+<div class="m-container-small m-padded-tb-massive disabled" style="max-width: 30em !important;">
+    <div class="ur container">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <div class="content">
+                        会员注册
+                    </div>
+                </h2>
+                <form class="ui large form" method="post" action="#" th:action="@{/member/logon}">
+                    <div class="ui  segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="envelope icon"></i>
+                                <input id="mail" type="text" name="email" placeholder="邮件">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div style="border-right: 1px solid rgba(34,36,38,.15)" class="ui action input" >
+                                <input type="text" name="code" placeholder="发送验证码">
+                                <input type="button" style="border: 1px solid rgba(34,36,38,.15)" class="ui button" value="发送" id="send" th:onclick="|sentmail()|">
+                            </div>
+                        </div>
+
+
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="密码">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="repassWord" placeholder="再次输入">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="phone volume icon"></i>
+                                <input type="text" name="phone" placeholder="常用手机号">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="keyboard icon"></i>
+                                <input type="text" name="nickname" placeholder="昵称">
+                            </div>
+                        </div>
+                        <button class="ui fluid large teal submit button">注  册</button>
+                    </div>
+
+                    <div class="ui error mini message" ></div>
+                    <div class="ui mini negative message" th:text="${msg}" th:if="${msg}" >用户名和密码错误</div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+<script>
+    function sentmail () {
+        if ($("#mail").val() == "") {
+            alert("请输入邮箱！")
+            return;
+        }
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if (!myreg.test($("#mail").val())) {
+            alert("请确保邮箱格式正确！")
+            return;
+        }
+        $("#send").val("发送中...");
+        $.ajax({
+            url: "/member/sentMail",
+            type: "GET",
+            data: {"email": $("#mail").val()},
+            timeout: 5000,
+            success: function (data) {
+                $("#send").val("✔");
+                $("#send").attr("disabled", "true");
+            },
+            error: function () {
+
+            }
+        });
+
+    }
+
+    $('.ui.form').form({
+        on: 'blur',
+        fields : {
+            email : {
+                identifier: 'email',
+                rules: [{
+                    type : 'email',
+                    prompt: '请输入合法邮件'
+                }]
+            },
+            code : {
+                identifier: 'code',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入验证码'
+                }]
+            },
+            password: {
+                identifier  : 'password', //表单中的name属性值
+                rules: [
+                    {
+                        type   : 'length[6]',
+                        prompt : '密码必须至少6个字符'
+                    }
+                ]
+            },
+            repassWord:{
+                identifier  : 'repassWord',
+                rules: [{
+                        type   : 'match[password]', //match[name属性值]
+                        prompt : '两次的密码必须一致'
+                    }]
+            },
+            phone:{
+                identifier  : 'phone',
+                rules: [{
+                    type   : 'length[11]', //match[name属性值]
+                    prompt : '请输入正确的手机号码'
+                }]
+            },
+            nickname:{
+                identifier  : 'nickname',
+                rules: [{
+                    type   : 'empty', //match[name属性值]
+                    prompt : '昵称不为空'
+                }]
+            },
+
+
+        }
+    });
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+</script>
+
+</body>
+</html>

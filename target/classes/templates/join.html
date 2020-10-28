@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head  th:replace="_fragments :: head(~{::title})">
+    <title>升级会员</title>
+</head>
+
+<body class="aboutme-bg">
+
+<!--头部导航-->
+<nav th:replace="_fragments :: menu(5)" ></nav>
+
+<!--中间内容-->
+<div  class="m-container m-padded-tb-big animated fadeIn">
+    <div class="ui container">
+        <div class="ui negative message" th:if="${session.msg}" >
+            <i class="close icon"></i>
+            <div class="header">非常抱歉您现在不能访问这个页面 </div>
+            <p th:text="${session.msg}">请求已过期 </p></div>
+        <div class="ui special cards">
+        <div class="ui card">
+            <div class="content">
+                <div class="header">初级会员</div>
+            </div>
+            <div class="content">
+                <h4 class="ui sub header">你可以获得：</h4>
+                <div class="ui small feed">
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">波段交易的技术综合运用 </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">波段交易的选股方法 </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">波段交易的买卖点判断  </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">正确的交易心态  </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">如何构建交易策略  </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">仓位管理与资金配置  </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary"><a>......</a>  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="extra content">
+                <a style="color: #bfb199">￥365/年 </a> <button class="ui button" th:onclick="|show()|">现在加入</button>
+            </div>
+        </div>
+
+        <!--<div class="ui card">
+            <div class="content">
+                <div class="header">高级会员</div>
+            </div>
+            <div class="content">
+                <h4 class="ui sub header">权益</h4>
+                <div class="ui small feed">
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">阅读初级会员文章和高级会员文章 </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary"><a>......</a>  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="extra content">
+                <a style="color: #bfb199">￥199  </a><button class="ui button" th:onclick="|show()|">现在加入</button>
+            </div>
+        </div>
+        -->
+
+        <div class="ui card">
+            <div class="content">
+                <div class="header">敬请期待...</div>
+            </div>
+
+            <div class="content">
+                <img class="ui wireframe image" src="#" th:src="@{/images/paragraph.png}">
+                <img class="ui wireframe image" src="#" th:src="@{/images/paragraph.png}">
+            </div>
+
+            <div class="extra content">
+                <a style="color: #bfb199">￥..  </a><button class="ui button">现在加入</button>
+            </div>
+            </div>
+        </div>
+
+        <div class="ui info message">
+            <i class="close icon"></i>
+            <div class="header">如何升级会员? </div>
+            <ul class="list">
+                <li>添加站长微信。</li>
+                <li>告知站长您的邮箱。</li>
+                <li>付费后站长将您升级。</li>
+            </ul>
+        </div>
+
+        <div class="ui three steps">
+            <div class="active step">
+                <i class="comment outline icon"></i>
+                <div class="content">
+                    <div class="title">添加站长微信</div>
+                </div>
+            </div>
+            <div class="step">
+                <i class="payment icon"></i>
+                <div class="content">
+                    <div class="title">付费购买会员</div>
+                </div>
+            </div>
+            <div class="step">
+                <i class="info icon"></i>
+                <div class="content">
+                    <div class="title">后台设置会员</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui long test modal">
+        <div class="header">
+            扫码添加微信
+        </div>
+        <div class="image content">
+            <div class="ui medium image">
+                <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}">
+            </div>
+            <div class="description">
+                <div class="ui header">小提示</div>
+                <p>记得备注自己信息哦！</p>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui primary approve button">
+                好的
+                <i class="right chevron icon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<!--底部footer-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+
+</footer>
+
+<!--导入的script-->
+<th:block th:replace="_fragments :: script">
+
+</th:block>
+
+<script>
+    function show(){
+        $('.ui.modal')
+            .modal({
+                blurring: true
+            })
+            .modal('show')
+        ;
+    }
+
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+    $('.wechat').popup({
+        popup : $('.wechat-qr'),
+        position: 'bottom center'
+    });
+    $('.qq').popup();
+
+</script>
+</body>
+</html>

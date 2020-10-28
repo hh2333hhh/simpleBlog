@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.dao.MediaDao">
+    <select id="getMedia" resultType="Media">
+        select id,url,name,type,realname,description from blog.t_media where id = #{id}
+    </select>
+
+    <insert id="saveMedia" parameterType="Media">
+        insert into blog.t_media(url,name,type,realname,description) values (#{url},#{name},#{type},#{realname},#{description});
+    </insert>
+
+    <select id="getAllMedia" resultType="Media">
+        select * from t_media
+    </select>
+
+    <delete id="deleteMedia" >
+        delete from blog.t_media where id = #{id}
+    </delete>
+
+</mapper>
