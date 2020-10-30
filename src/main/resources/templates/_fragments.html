@@ -22,7 +22,7 @@
 <nav th:fragment="menu(n)" class="ui inverted segment m-padded-tb-mini m-shadow-small" style="background-color: #222;margin:0px;padding:0;">
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
-      <h1 class="ui olive header item">Halo</h1>
+      <h1 class="ui olive header item">波段</h1>
       <a href="#" th:href="@{/}" class="m-item item inverted m-mobile-hide" th:classappend="${n==1}?'active'"><i class=" home icon"></i>首页</a>
       <a href="#" th:href="@{/types/-1}" class="m-item inverted item m-mobile-hide" th:classappend="${n==2}?'active'"><i class=" idea icon"></i>分类</a>
       <a href="#" th:href="@{/tags/-1}" class="m-item inverted item m-mobile-hide" th:classappend="${n==3}?'active'"><i class=" tags icon"></i>标签</a>
