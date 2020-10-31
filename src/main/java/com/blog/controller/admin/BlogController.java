@@ -89,8 +89,10 @@ public class BlogController {
         //处理置顶的业务逻辑
         if (blog.isRecommend()){
             Blog recommendBlog = blogService.getRecommendBlog();
-            recommendBlog.setRecommend(false);
-            blogService.updateBlog(recommendBlog);
+            if (recommendBlog != null){
+                recommendBlog.setRecommend(false);
+                blogService.updateBlog(recommendBlog);
+            }
         }
 
         if (blog.getId() == null) {   //id为空，则为新增

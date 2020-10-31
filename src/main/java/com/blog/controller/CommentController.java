@@ -39,7 +39,7 @@ public class CommentController {
         User user = (User) session.getAttribute("user");
         if (user != null){
             comment.setNickname(user.getNickname());//用户为管理员
-            comment.setAvatar(user.getAvatar());
+            comment.setAvatar("/images/s.jpg");
             comment.setAdminComment(true);
         }else {
             String avatar = (String) session.getAttribute("avatar");

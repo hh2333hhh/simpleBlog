@@ -108,7 +108,10 @@ public class BlogServiceImpl implements BlogService {
 
     @Override   //编辑博客
     public int updateBlog(Blog blog) {
+
         if (blogDao.getBlog(blog.getId()).isRecommend()^blog.isRecommend()){
+            Blog oldblog = getDetailedBlog(blog.getId());
+            blog.setUpdateTime(oldblog.getUpdateTime());
             System.out.println("updateBlog:去置顶");
         }else {
             blog.setUpdateTime(new Date());
